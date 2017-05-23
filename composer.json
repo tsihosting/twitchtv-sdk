@@ -8,7 +8,7 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Tim Igoe",
+      "name": "Tim Igoe"
     }
   ],
   "require": {
@@ -16,11 +16,11 @@
     "guzzlehttp/guzzle" : "~5.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "4.3.*",
+    "phpunit/phpunit": "4.3.*"
   },
   "autoload": {
     "psr-4": {
-      "TSIHosting\\TwitchSDK\\": "src/",
+      "TSIHosting\\TwitchSDK\\": "src/"
     }
   }
 }
