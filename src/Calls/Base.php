@@ -42,6 +42,12 @@ class Base
   {
     $params['headers'] = $this->headers;
 
+    if (is_array($this->pagination))
+    {
+      $joiner = (strpos($uri, '?') === false ? '?' : '&');
+      $uri .= $joiner . implode('&', $this->pagination);
+    }
+
     $result = $this->guzzle->request($method, $uri, $params);
 
     if ($result->getStatusCode() != 200)
@@ -55,5 +61,17 @@ class Base
     $data = json_decode($body);
 
     return $data;
+  }
+
+  /**
+   * Set the Limit and Offset (Pagination) up
+   * @param
+   */
+  public function setPage($offset = 0, $limit = 100)
+  {
+    $this->pagination = [
+      'limit' => limit,
+      'offset' => $offset
+    ];
   }
 }
