@@ -17,6 +17,11 @@ class Base
   private $headers = [];
 
   /**
+   * @var array
+   */
+  protected $pagination = [];
+
+  /**
    * Base constructor.
    * @param Guzzle $guzzle
    * @param $authToken
@@ -42,10 +47,10 @@ class Base
   {
     $params['headers'] = $this->headers;
 
-    if (is_array($this->pagination))
+    if (is_array($this->pagination) && isset($this->pagination['limit']))
     {
       $joiner = (strpos($uri, '?') === false ? '?' : '&');
-      $uri .= $joiner . implode('&', $this->pagination);
+      $uri .= $joiner . 'limit=' . $this->pagination['limit'] . '&offset=' . $this->pagination['offset'];
     }
 
     $result = $this->guzzle->request($method, $uri, $params);
@@ -65,13 +70,16 @@ class Base
 
   /**
    * Set the Limit and Offset (Pagination) up
-   * @param
+   * @param $offset int
+   * @param $limit int
    */
   public function setPage($offset = 0, $limit = 100)
   {
     $this->pagination = [
-      'limit' => limit,
+      'limit' => $limit,
       'offset' => $offset
     ];
+
+    return $this;
   }
 }
