@@ -23,7 +23,7 @@ class Videos extends Base
    */
   public function videoById($cid, $limit = null, $offset = null)
   {
-    return $this->request('GET', self::URI . '/' . $cid . '/videos?limit=' . ($limit ? $limit : '100') . ($offset ? '?offset=' . $offset : ''));
+    return $this->request('GET', self::URI . '/' . $cid . '/videos?limit=' . ($limit ? $limit : '100') . ($offset ? ($limit ? '&' : '?') . 'offset=' . $offset : ''));
   }
 
 }
